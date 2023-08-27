@@ -25,12 +25,27 @@
     <th>#</th>
     <th>#</th>
     </tr>
-    {% for task in tasks %}
+    {% for task in tasks reversed %}
     <tr>
+    
     <td>{{ task.name }}</td>
     <td>{{ task.time }}</td>
-    <td><button type="button" class="btn btn-warning">UPDATE</button></td>
-    <td><button type="button" class="btn btn-danger">DELETE</button></td>
+    <td>
+      <form action="updatetask/{{ task.id }}" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+        <input type="submit" class="btn btn-warning" value="UPDATE">
+      </form>
+    </td>
+    <td>
+    <form action="deletetask/{{ task.id }}" method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+      <input type="submit" class="btn btn-danger" value="DELETE">
+    </form>
+    
+    </td>
+    <td>{{ task.id }}</td>
     {% endfor %}
 
     </tr>

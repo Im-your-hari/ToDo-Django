@@ -10,8 +10,16 @@ def index(request):
 def addtask(request):
 
     taskname = request.POST['taskname']
-    print(taskname)
+    #print(taskname)
     context ={'taskname' : taskname}
 
     ToDo(name=taskname).save()
     return redirect(request.META['HTTP_REFERER'])
+
+def deletetask(request, taskid):
+    task = ToDo.objects.filter(id=taskid)
+    task.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
+def updatetask(request, taskid):
+    pass
